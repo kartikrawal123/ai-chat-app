@@ -1,41 +1,96 @@
-<<<<<<< HEAD
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Chat App
+
+A production-style AI chat application built with Next.js App Router, TypeScript, Tailwind CSS, and the OpenAI API.
+
+## Features
+
+- Clean chat UI with loading and error states
+- Keyboard shortcut support (`Ctrl/Cmd + Enter`)
+- Typed request/response handling across frontend and backend
+- Server-side input validation and structured API errors
+- OpenAI integration via `app/api/chat/route.ts`
+
+## Tech Stack
+
+- Next.js 16 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- OpenAI Node SDK
+
+## Project Structure
+
+```txt
+app/
+  api/chat/route.ts   # Backend API route for chat completion
+  page.tsx            # Frontend chat interface
+```
 
 ## Getting Started
 
-First, run the development server:
+### 1) Install dependencies
+
+```bash
+npm install
+```
+
+### 2) Configure environment variables
+
+Create `.env.local` in the project root:
+
+```bash
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
+### 3) Run locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` - Start development server
+- `npm run build` - Create production build
+- `npm run start` - Run production server
+- `npm run lint` - Run ESLint
 
-## Learn More
+## API Contract
 
-To learn more about Next.js, take a look at the following resources:
+### `POST /api/chat`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Request body:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```json
+{
+  "message": "Your prompt text"
+}
+```
 
-## Deploy on Vercel
+Success response (`200`):
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```json
+{
+  "reply": "Model response text"
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-=======
-# ai-chat-app
-A modern AI chat application built with Next.js, TypeScript, Tailwind CSS, and OpenAI API that delivers real-time AI-generated conversations through a clean and responsive interface.
->>>>>>> 9e1477f198166bd23a6ef6b74928a7501c8d5451
+Error response (for example `400`, `429`, `500`):
+
+```json
+{
+  "error": "Human-readable error message"
+}
+```
+
+## Troubleshooting
+
+- **`500` with missing key**: Ensure `OPENAI_API_KEY` is present in `.env.local` and restart the dev server.
+- **`429` quota error**: Check billing/usage for your OpenAI project and key.
+- **Push rejected (non-fast-forward)**: Pull and merge remote changes before pushing.
+
+## License
+
+For personal and educational use. Add a formal license file if you plan to distribute this project.
